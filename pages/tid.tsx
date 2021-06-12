@@ -12,11 +12,11 @@ export default function Tid() {
   const [kw, setKw] = useState(20);
 
   const handleKm = ({ target }: ChangeEvent<HTMLInputElement>) =>
-    setKm(Number(target.value));
+    setKm(Number.parseInt(target.value, 10));
   const handleKwPerMile = ({ target }: ChangeEvent<HTMLInputElement>) =>
-    setKwPerMile(Number(target.value));
+    setKwPerMile(Number.parseInt(target.value, 10));
   const handleKw = ({ target }: ChangeEvent<HTMLInputElement>) =>
-    setKw(Number(target.value));
+    setKw(Number.parseInt(target.value, 10));
 
   const speed = getChargingSpeedInKMMinute(kwPerMile, kw);
   const time = getTimeForDistance(km, speed);
@@ -42,9 +42,9 @@ export default function Tid() {
               value={km}
               onChange={handleKm}
               type="number"
-              className="w-20"
+              className="w-28 py-2 pl-2 pr-1"
             ></input>
-            <span className="absolute right-6">km</span>
+            <span className="absolute right-6 pt-2">km</span>
           </div>
           <label htmlFor="kWt">
             Hva er estimert forbruk av kWt på strekningen, per mil?
@@ -57,9 +57,9 @@ export default function Tid() {
               onChange={handleKwPerMile}
               type="number"
               step="0.1"
-              className="w-28"
+              className="w-32 py-2 pl-2 pr-1"
             ></input>
-            <span className="absolute right-6">kWt/mil</span>
+            <span className="absolute right-6 pt-2">kWt/mil</span>
           </div>
           <label htmlFor="kw">Hvor fort kommer du til å lade (i snitt)?</label>
           <div className="relative self-center">
@@ -69,9 +69,9 @@ export default function Tid() {
               value={kw}
               onChange={handleKw}
               type="number"
-              className="w-20"
+              className="w-24 py-2 pl-2 pr-1"
             ></input>{' '}
-            <span className="absolute right-6">kW</span>
+            <span className="absolute right-6 pt-2">kW</span>
           </div>
         </form>
         <section className="border-t-2 pt-8">

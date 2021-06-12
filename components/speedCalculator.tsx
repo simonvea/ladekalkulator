@@ -21,7 +21,7 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ charger, prices }) => {
   }, [charger]);
 
   const handleSpeedInput = (event: ChangeEvent<HTMLInputElement>) => {
-    const newSpeed = Math.min(Number(event.target.value), charger);
+    const newSpeed = Math.min(Number.parseInt(event.target.value, 10), charger);
     setSpeed(newSpeed);
   };
 
@@ -44,9 +44,9 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ charger, prices }) => {
             onChange={handleSpeedInput}
             type="number"
             max={charger}
-            className="w-16"
+            className="w-24 py-2 pl-2 pr-1"
           ></input>
-          <span className="absolute right-5">kW</span>
+          <span className="absolute right-6 pt-2">kW</span>
         </div>
       </form>
       <section className="flex space-x-1 items-baseline my-4">
