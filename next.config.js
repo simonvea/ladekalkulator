@@ -7,4 +7,5 @@ module.exports = withPWA({
     runtimeCaching,
   },
   future: { webpack5: true },
+  target: 'serverless', // Netlify requires this
 });
