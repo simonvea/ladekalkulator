@@ -1,5 +1,5 @@
 type PriceInfoPer = {
-  kwT: number;
+  kWt: number;
   minute: number;
 };
 
@@ -8,13 +8,16 @@ export type ProviderInfo = {
   22?: PriceInfoPer;
   50?: PriceInfoPer;
   100?: PriceInfoPer;
+  125?: PriceInfoPer;
   150?: PriceInfoPer;
+  200?: PriceInfoPer;
+  225?: PriceInfoPer;
   300?: PriceInfoPer;
 };
 
 function pricePrMinute(priceInfo: PriceInfoPer, KWT: number) {
   const KWPrMin = KWT / 60;
-  return KWPrMin * priceInfo.kwT + priceInfo.minute;
+  return KWPrMin * priceInfo.kWt + priceInfo.minute;
 }
 
 type PricePrMinute = {
