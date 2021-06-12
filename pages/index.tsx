@@ -7,7 +7,7 @@ export default function Home() {
       <header className="flex flex-col justify-evenly items-center">
         <h1 className="text-2xl">Ladekalkulator</h1>
         <Image
-          src="/images/logo.svg"
+          src="/images/logo192x192.png"
           height={189}
           width={189}
           alt="Ladekalkulator logo. Ladestasjon med kalkulator."
