@@ -1,8 +1,5 @@
-export function getTimeForDistance(
-  distanceInKm: number,
-  charginingSpeedPerMinute: number
-) {
-  return distanceInKm * charginingSpeedPerMinute;
+export function getTimeForDistance(distanceInKm: number, kmPerMinute: number) {
+  return distanceInKm / kmPerMinute;
 }
 
 export function getChargingSpeedInKMMinute(
@@ -11,5 +8,5 @@ export function getChargingSpeedInKMMinute(
 ) {
   const kwPerKm = consumptionInKW / 10;
   const kwPerMinute = chargingSpeedInKW / 60;
-  return kwPerKm / kwPerMinute;
+  return kwPerMinute / kwPerKm;
 }
