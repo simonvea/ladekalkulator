@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import styles from '../styles/Home.module.css';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -12,7 +12,12 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1>Hvor er det billigst å lade?</h1>
+        <Link href="/billigst">
+          <a>Hvor er det billigst å lade?</a>
+        </Link>
+        <Link href="/tid">
+          <a>Hvor lenge må jeg lade?</a>
+        </Link>
       </main>
 
       <footer className={styles.footer}></footer>
