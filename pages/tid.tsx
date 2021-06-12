@@ -5,6 +5,7 @@ import {
   getChargingSpeedInKMMinute,
   getTimeForDistance,
 } from '../business/calculateTimeForDistance';
+import timeToString from '../business/timeToString';
 
 export default function Tid() {
   const [km, setKm] = useState(10);
@@ -12,11 +13,11 @@ export default function Tid() {
   const [kw, setKw] = useState(20);
 
   const handleKm = ({ target }: ChangeEvent<HTMLInputElement>) =>
-    setKm(Number.parseInt(target.value, 10));
+    setKm(Number.parseInt(target.value.slice(0, 4), 10));
   const handleKwPerMile = ({ target }: ChangeEvent<HTMLInputElement>) =>
-    setKwPerMile(Number.parseInt(target.value, 10));
+    setKwPerMile(Number.parseInt(target.value.slice(0, 3), 10));
   const handleKw = ({ target }: ChangeEvent<HTMLInputElement>) =>
-    setKw(Number.parseInt(target.value, 10));
+    setKw(Number.parseInt(target.value.slice(0, 3), 10));
 
   const speed = getChargingSpeedInKMMinute(kwPerMile, kw);
   const time = getTimeForDistance(km, speed);
@@ -36,6 +37,7 @@ export default function Tid() {
         <form className="my-4 flex flex-col items-baseline space-y-4">
           <label htmlFor="km">Hvor mange km vil du kjøre?</label>
           <div className="relative self-center">
+            <span className="absolute right-6 pt-2">km</span>
             <input
               name="km"
               id="km"
@@ -44,12 +46,12 @@ export default function Tid() {
               type="number"
               className="w-28 py-2 pl-2 pr-1"
             ></input>
-            <span className="absolute right-6 pt-2">km</span>
           </div>
           <label htmlFor="kWt">
             Hva er estimert forbruk av kWt på strekningen, per mil?
           </label>
           <div className="relative self-center">
+            <span className="absolute right-6 pt-2">kWt/mil</span>
             <input
               name="kWt"
               id="kWt"
@@ -59,10 +61,10 @@ export default function Tid() {
               step="0.1"
               className="w-32 py-2 pl-2 pr-1"
             ></input>
-            <span className="absolute right-6 pt-2">kWt/mil</span>
           </div>
           <label htmlFor="kw">Hvor fort kommer du til å lade (i snitt)?</label>
           <div className="relative self-center">
+            <span className="absolute right-6 pt-2">kW</span>
             <input
               name="kw"
               id="kw"
@@ -71,13 +73,12 @@ export default function Tid() {
               type="number"
               className="w-24 py-2 pl-2 pr-1"
             ></input>{' '}
-            <span className="absolute right-6 pt-2">kW</span>
           </div>
         </form>
         <section className="border-t-2 pt-8">
           <p className="my-2">
-            Du må lade i <strong>{Math.round(time)} minutter</strong> for å
-            kunne kjøre {km} km.
+            Du må lade i <strong>{timeToString(time)}</strong> for å kunne kjøre{' '}
+            {km} km.
           </p>
           <p className="my-2">
             Jeg vil anbefale at du legger til litt ekstra for å ha litt
