@@ -31,42 +31,70 @@ export default function Tid() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <h2>Hvor lenge må du lade?</h2>
+      <main className="flex flex-col items-center px-6 w-full">
+        <h1 className="text-xl mb-4 mt-8">Hvor lenge må du lade?</h1>
 
-        <label>
-          Hvor mange km vil du kjøre?
-          <input value={km} onChange={handleKm} type="number"></input>
-        </label>
-        <label>
-          Hva er estimert forbruk av KWT på strekningen, per mil? (kwt/mil)
-          <input
-            value={kwPerMile}
-            onChange={handleKwPerMile}
-            type="number"
-            step="0.1"
-          ></input>
-        </label>
-        <label>
-          Hvor fort kommer du til å lade (i snitt)?
-          <input value={kw} onChange={handleKw} type="number"></input>
-        </label>
-
-        <p>
-          Du må lade i <strong>{Math.round(time)} minutter</strong> for å kunne
-          kjøre {km} km.
-        </p>
-        <p>
-          Jeg vil anbefale at du legger til litt ekstra for å ha litt marginer.
-        </p>
-        <p>
-          Med den hastigheten du har valgt lader du {speed.toFixed(2)} km per
-          minutt.
-        </p>
-        <Link href="/">
-          <a>Tilbake til fremsiden</a>
-        </Link>
+        <form className="my-4 flex flex-col items-baseline space-y-4">
+          <label htmlFor="km">Hvor mange km vil du kjøre?</label>
+          <div className="relative self-center">
+            <input
+              name="km"
+              id="km"
+              value={km}
+              onChange={handleKm}
+              type="number"
+              className="w-20"
+            ></input>
+            <span className="absolute right-6">km</span>
+          </div>
+          <label htmlFor="kWt">
+            Hva er estimert forbruk av kWt på strekningen, per mil?
+          </label>
+          <div className="relative self-center">
+            <input
+              name="kWt"
+              id="kWt"
+              value={kwPerMile}
+              onChange={handleKwPerMile}
+              type="number"
+              step="0.1"
+              className="w-28"
+            ></input>
+            <span className="absolute right-6">kWt/mil</span>
+          </div>
+          <label htmlFor="kw">Hvor fort kommer du til å lade (i snitt)?</label>
+          <div className="relative self-center">
+            <input
+              name="kw"
+              id="kw"
+              value={kw}
+              onChange={handleKw}
+              type="number"
+              className="w-20"
+            ></input>{' '}
+            <span className="absolute right-6">kW</span>
+          </div>
+        </form>
+        <section className="border-t-2 pt-8">
+          <p className="my-2">
+            Du må lade i <strong>{Math.round(time)} minutter</strong> for å
+            kunne kjøre {km} km.
+          </p>
+          <p className="my-2">
+            Jeg vil anbefale at du legger til litt ekstra for å ha litt
+            marginer.
+          </p>
+          <p className="my-2">
+            Med den hastigheten du har valgt lader du {speed.toFixed(2)} km per
+            minutt.
+          </p>
+        </section>
       </main>
+      <footer className="absolute bottom-0 flex justify-center items-center w-full h-1/4">
+        <Link href="/">
+          <a className="p-3 bg-gray-300 rounded">Tilbake til fremsiden</a>
+        </Link>
+      </footer>
     </>
   );
 }
