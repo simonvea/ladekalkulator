@@ -34,46 +34,79 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ charger, prices }) => {
 
   return (
     <section>
-      <h2>{charger}KW lader</h2>
-      <form>
-        <label>
-          Hvor fort lader du i snitt?
+      <form className="my-4 flex flex-col items-center space-y-3">
+        <label htmlFor="speed">Hvor fort lader du i snitt?</label>
+        <div className="relative">
           <input
+            name="speed"
+            id="speed"
             value={speed}
             onChange={handleSpeedInput}
             type="number"
             max={charger}
+            className="w-16"
           ></input>
-          <span>KW</span>
-        </label>
+          <span className="absolute right-5">kW</span>
+        </div>
       </form>
-      <h3>Billigst:</h3>
-      <span>{cheapest}</span>
-      <h3>Priser:</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Navn</th>
-            <th>per minutt</th>
-            <th>lading i 15 min</th>
-            <th>lading i 30 min</th>
-            <th>lading i 45 min</th>
-            <th>lading i 60 min</th>
-          </tr>
-        </thead>
-        <tbody>
-          {pricePerMinute.map((p) => (
-            <tr key={p.name}>
-              <th scope="row">{p.name}</th>
-              <td>{p.price.toFixed(2)} kr</td>
-              <td>{priceForTime(p.price, 15)}</td>
-              <td>{priceForTime(p.price, 30)}</td>
-              <td>{priceForTime(p.price, 45)}</td>
-              <td>{priceForTime(p.price, 60)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <section className="flex space-x-1 items-baseline my-4">
+        <h3 className="text-lg mr-2">Billigst:</h3>
+        <strong>{cheapest}</strong>
+      </section>
+      <section>
+        <h3 className="text-lg font-medium underline">Priser</h3>
+        <div className="overflow-x-auto max-w-xs shadow border-b border-gray-200 sm:rounded-lg mt-4 ">
+          <table className="divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
+                <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                  per minutt
+                </th>
+                <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                  15 min
+                </th>
+                <th className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                  30 min
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                  45 min
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                  60 min
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200 divide-x">
+              {pricePerMinute.map((p) => (
+                <tr key={p.name}>
+                  <th
+                    scope="row"
+                    className="text-left text-m text-gray-600 font-medium px-3"
+                  >
+                    {p.name}
+                  </th>
+                  <td className="px-3 py-2 whitespace-nowrap">
+                    {p.price.toFixed(2)} kr
+                  </td>
+                  <td className="px-3 py-2 whitespace-nowrap">
+                    {priceForTime(p.price, 15)} kr
+                  </td>
+                  <td className="px-3 py-2 whitespace-nowrap">
+                    {priceForTime(p.price, 30)} kr
+                  </td>
+                  <td className="px-3 py-2 whitespace-nowrap">
+                    {priceForTime(p.price, 45)} kr
+                  </td>
+                  <td className="px-3 py-2 whitespace-nowrap">
+                    {priceForTime(p.price, 60)} kr
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
     </section>
   );
 };

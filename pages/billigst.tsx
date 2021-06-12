@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import Link from 'next/link';
 import { Charger } from '../business/findCheapestProvider';
 import { prices } from '../business/data';
 import { ChangeEvent, useState } from 'react';
@@ -20,22 +20,32 @@ export default function Billigst() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1> Hvor er det billigst å lade?</h1>
+      <main className="flex flex-col items-center px-6 w-full">
+        <h1 className="text-xl mb-4 mt-8"> Hvor er det billigst å lade?</h1>
 
-        <label>
-          Hvilken type lader?
-          <select value={charger} onChange={handleSelect}>
+        <form className="my-4 flex flex-col items-center space-y-4">
+          <label htmlFor="charger">Hvilken type lader?</label>
+          <select
+            name="charger"
+            id="charger"
+            value={charger}
+            onChange={handleSelect}
+          >
             {availableChargers.map((c) => (
               <option value={c} key={c}>
-                {c} KW
+                {c} kW
               </option>
             ))}
           </select>
-        </label>
+        </form>
 
         <SpeedCalculator charger={charger} prices={prices} />
       </main>
+      <footer className="absolute bottom-0 flex justify-center items-center w-full h-1/4">
+        <Link href="/">
+          <a className="p-3 bg-gray-300 rounded">Tilbake til fremsiden</a>
+        </Link>
+      </footer>
     </>
   );
 }
