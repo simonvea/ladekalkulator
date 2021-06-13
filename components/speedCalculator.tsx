@@ -5,26 +5,30 @@ import {
   getPricePrMinute,
   Provider,
   ProviderInfo,
-  PriceInfoPer,
   addDiscount,
 } from '../business/findCheapestProvider';
 
 export type SpeedCalculatorProps = {
-  charger: Charger;
   prices: ProviderInfo[];
 };
 
-const SpeedCalculator: FC<SpeedCalculatorProps> = ({ charger, prices }) => {
-  const [speed, setSpeed] = useState<number>(charger);
+const SpeedCalculator: FC<SpeedCalculatorProps> = ({ prices }) => {
   const [showDiscount, setShowDiscount] = useState(false);
   const [discountProvider, setDiscountProvider] = useState<Provider>('mer');
   const [discountPercent, setDiscountPercent] = useState('10');
+  const [charger, setCharger] = useState<Charger>(50);
+  const [speed, setSpeed] = useState<number>(charger);
 
   useEffect(() => {
     if (speed > charger) {
       setSpeed(charger);
     }
   }, [charger]);
+
+  const availableChargers: Charger[] = [22, 50];
+
+  const handleChargerSelect = (e: ChangeEvent<HTMLSelectElement>) =>
+    setCharger(Number(e.target.value) as Charger);
 
   const handleSpeedInput = (event: ChangeEvent<HTMLInputElement>) => {
     const newSpeed = Math.min(Number.parseInt(event.target.value, 10), charger);
@@ -67,6 +71,19 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ charger, prices }) => {
   return (
     <section>
       <form className="my-4 flex flex-col items-center space-y-3">
+        <label htmlFor="charger">Hvilken type lader?</label>
+        <select
+          name="charger"
+          id="charger"
+          value={charger}
+          onChange={handleChargerSelect}
+        >
+          {availableChargers.map((c) => (
+            <option value={c} key={c}>
+              {c} kW
+            </option>
+          ))}
+        </select>
         <label htmlFor="speed">Hvor fort lader du i snitt?</label>
         <div className="relative">
           <input
