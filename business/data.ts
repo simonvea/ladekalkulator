@@ -9,7 +9,7 @@ export const prices: ProviderInfo[] = [
     200: { kWt: 3.2, minute: 1.25 },
   },
   {
-    name: 'Cicle K',
+    name: 'Circle K',
     50: { kWt: 4.49, minute: 0 },
     150: { kWt: 4.99, minute: 0 },
   },
