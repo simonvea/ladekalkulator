@@ -13,7 +13,7 @@ export default function Billigst() {
     setCharger(Number(e.target.value) as Charger);
 
   return (
-    <>
+    <div className="flex flex-col items-center justify-evenly space-y-8 min-h-screen">
       <Head>
         <title>Billigste ladere</title>
         <meta name="description" content="Viser de billigste lademulighetene" />
@@ -41,11 +41,11 @@ export default function Billigst() {
 
         <SpeedCalculator charger={charger} prices={prices} />
       </main>
-      <footer className="absolute bottom-0 flex justify-center items-center w-full h-1/4">
+      <footer className="flex justify-center items-end w-full">
         <Link href="/">
           <a className="p-3 bg-gray-300 rounded">Tilbake til fremsiden</a>
         </Link>
       </footer>
-    </>
+    </div>
   );
 }

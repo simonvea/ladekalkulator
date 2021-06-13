@@ -55,7 +55,7 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ charger, prices }) => {
       </section>
       <section>
         <h3 className="text-lg font-medium underline">Priser</h3>
-        <div className="overflow-x-auto max-w-xs shadow border-b border-gray-200 sm:rounded-lg mt-4 ">
+        <div className="overflow-x-auto max-w-xs sm:max-w-max shadow border-b border-gray-200 sm:rounded-lg mt-4 ">
           <table className="divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
