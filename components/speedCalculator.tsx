@@ -1,9 +1,12 @@
-import { ChangeEvent, FC, useEffect, useState } from 'react';
+import { ChangeEvent, FC, useCallback, useEffect, useState } from 'react';
 import {
   Charger,
   getCheapest,
   getPricePrMinute,
+  Provider,
   ProviderInfo,
+  PriceInfoPer,
+  addDiscount,
 } from '../business/findCheapestProvider';
 
 export type SpeedCalculatorProps = {
@@ -13,6 +16,9 @@ export type SpeedCalculatorProps = {
 
 const SpeedCalculator: FC<SpeedCalculatorProps> = ({ charger, prices }) => {
   const [speed, setSpeed] = useState<number>(charger);
+  const [showDiscount, setShowDiscount] = useState(false);
+  const [discountProvider, setDiscountProvider] = useState<Provider>('mer');
+  const [discountPercent, setDiscountPercent] = useState('10');
 
   useEffect(() => {
     if (speed > charger) {
@@ -25,7 +31,33 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ charger, prices }) => {
     setSpeed(newSpeed);
   };
 
-  const pricePerMinute = getPricePrMinute(prices, charger, speed);
+  const handleDiscountSelect = () => setShowDiscount(!showDiscount);
+
+  const handleDiscountProviderSelect = (e: ChangeEvent<HTMLSelectElement>) =>
+    setDiscountProvider(e.target.value as Provider);
+
+  const handleDiscountPercent = (e: ChangeEvent<HTMLInputElement>) => {
+    let value = Number.parseInt(e.target.value);
+    if (value > 100) value = 100;
+    if (value < 0) value = 0;
+
+    setDiscountPercent(value.toString());
+  };
+
+  const calculateDiscount = useCallback(
+    () =>
+      prices.map((provider) => {
+        if (provider.name === discountProvider) {
+          return addDiscount(provider, Number.parseInt(discountPercent));
+        }
+        return provider;
+      }),
+    [discountPercent, discountProvider]
+  );
+
+  const pricesWithdiscount = showDiscount ? calculateDiscount() : prices;
+
+  const pricePerMinute = getPricePrMinute(pricesWithdiscount, charger, speed);
 
   const cheapest = getCheapest(pricePerMinute).name;
 
@@ -48,6 +80,55 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ charger, prices }) => {
           ></input>
           <span className="absolute right-6 pt-2">kW</span>
         </div>
+        <p>Kalkulatoren antar at du betaler via app og ikke dropin/SMS.</p>
+        <div className="flex space-x-12 self-start w-72 items-center">
+          <label htmlFor="discountSelect">Har du noen rabatter?</label>
+          <input
+            name="discountSelect"
+            id="discountSelect"
+            type="checkbox"
+            checked={showDiscount}
+            onChange={handleDiscountSelect}
+            className="h-6 w-6 mr-4"
+          ></input>
+        </div>
+        <section
+          className={`flex justify-center items-center space-x-8 ${
+            showDiscount ? 'block' : 'hidden'
+          }`}
+        >
+          <div className="flex flex-col space-y-3">
+            <label htmlFor="discountProvider">Hvilken operatør?</label>
+            <select
+              name="discountProvider"
+              id="discountProvider"
+              value={discountProvider}
+              onChange={handleDiscountProviderSelect}
+            >
+              {(['BKK', 'Circle K', 'Fortum', 'mer'] as Provider[]).map(
+                (provider) => (
+                  <option value={provider} key={provider}>
+                    {provider}
+                  </option>
+                )
+              )}
+            </select>
+          </div>
+          <div>
+            <label htmlFor="discountAmount">Hvor mye?</label>
+            <div className="relative">
+              <span className="absolute right-6 pt-2">%</span>
+              <input
+                name="discountAmount"
+                id="discountAmount"
+                type="number"
+                className="w-24 py-2 pl-2 pr-1"
+                value={discountPercent}
+                onChange={handleDiscountPercent}
+              ></input>
+            </div>
+          </div>
+        </section>
       </form>
       <section className="flex space-x-1 items-baseline my-4">
         <h3 className="text-lg mr-2">Billigst:</h3>

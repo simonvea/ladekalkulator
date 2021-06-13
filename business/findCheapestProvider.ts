@@ -1,10 +1,12 @@
-type PriceInfoPer = {
+export type PriceInfoPer = {
   kWt: number;
   minute: number;
 };
 
+export type Provider = 'mer' | 'Fortum' | 'BKK' | 'Circle K';
+
 export type ProviderInfo = {
-  name: string;
+  name: Provider;
   22?: PriceInfoPer;
   50?: PriceInfoPer;
   100?: PriceInfoPer;
@@ -19,15 +21,6 @@ function pricePrMinute(priceInfo: PriceInfoPer, KWT: number) {
   const KWPrMin = KWT / 60;
   return KWPrMin * priceInfo.kWt + priceInfo.minute;
 }
-
-type PricePrMinute = {
-  name: string;
-  22?: number;
-  50?: number;
-  100?: number;
-  150?: number;
-  300?: number;
-};
 
 type PricePerMinute = {
   name: string;
@@ -57,4 +50,22 @@ export function getPricePrMinute(
 
 export function getCheapest(providers: PricePerMinute[]) {
   return providers.sort((a, b) => a.price - b.price)[0];
+}
+
+export function addDiscount(provider: ProviderInfo, discountPercent: number) {
+  const keys = Object.keys(provider);
+
+  const info = {
+    name: provider.name,
+  };
+
+  keys.forEach((k) => {
+    if (k !== 'name') {
+      info[k] = {
+        kWt: provider[k].kWt * ((100 - discountPercent) / 100),
+        minute: provider[k].minute * ((100 - discountPercent) / 100),
+      };
+    }
+  });
+  return info;
 }
