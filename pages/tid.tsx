@@ -87,7 +87,7 @@ export default function Tid() {
             </div>
             eller
             <div className="relative self-center">
-              <span className="absolute right-6 pt-2">km/kW</span>
+              <span className="absolute right-6 pt-2">km/kWt</span>
               <input
                 name="kmkW"
                 id="kmKw"
