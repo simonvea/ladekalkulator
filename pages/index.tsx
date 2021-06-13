@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -43,10 +42,10 @@ export default function Home() {
     <div className="h-screen grid grid-rows-2">
       <header className="flex flex-col justify-evenly items-center">
         <h1 className="text-2xl">Ladekalkulator</h1>
-        <Image
+        <img
           src="/images/logo192x192.png"
-          height={189}
-          width={189}
+          height={192}
+          width={192}
           alt="Ladekalkulator logo. Ladestasjon med kalkulator."
         />
       </header>
