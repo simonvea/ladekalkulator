@@ -1,9 +1,7 @@
 import Head from 'next/head';
-import Link from 'next/link';
-import { Charger } from '../business/findCheapestProvider';
 import { prices } from '../business/data';
-import { ChangeEvent, useState } from 'react';
 import SpeedCalculator from '../components/speedCalculator';
+import Footer from '../components/footer';
 
 export default function Billigst() {
   return (
@@ -19,11 +17,7 @@ export default function Billigst() {
 
         <SpeedCalculator prices={prices} />
       </main>
-      <footer className="flex justify-center items-end w-full">
-        <Link href="/">
-          <a className="p-3 bg-gray-300 rounded">Tilbake til fremsiden</a>
-        </Link>
-      </footer>
+      <Footer showBackToHome />
     </div>
   );
 }

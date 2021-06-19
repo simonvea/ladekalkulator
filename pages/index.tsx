@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import Footer from '../components/footer';
 
 export default function Home() {
   const [deferredPrompt, setDeferredPrompt] =
@@ -69,6 +70,7 @@ export default function Home() {
           Legg til hjem-skjerm
         </button>
       </main>
+      <Footer />
     </div>
   );
 }

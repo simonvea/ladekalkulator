@@ -8,6 +8,7 @@ import {
   kWprKmTokmPrkW,
 } from '../business/calculateTimeForDistance';
 import timeToString from '../business/timeToString';
+import Footer from '../components/footer';
 
 export default function Tid() {
   const [km, setKm] = useState(10);
@@ -47,7 +48,7 @@ export default function Tid() {
   const time = getTimeForDistance(km, speed);
 
   return (
-    <div className="flex flex-col items-center justify-around space-y-6">
+    <div className="flex flex-col items-center justify-around space-y-6 min-h-screen">
       <Head>
         <title>Ladetid</title>
         <meta
@@ -127,11 +128,7 @@ export default function Tid() {
           </p>
         </section>
       </main>
-      <footer className="flex justify-center items-center w-full mb-8">
-        <Link href="/">
-          <a className="p-3 bg-gray-300 rounded">Tilbake til fremsiden</a>
-        </Link>
-      </footer>
+      <Footer showBackToHome />
     </div>
   );
 }
