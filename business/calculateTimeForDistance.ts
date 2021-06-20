@@ -11,6 +11,10 @@ export function getChargingSpeedInKMMinute(
   return kwPerMinute / kwPerKm;
 }
 
+export function getKWNeededForDistance(kwPerKm: number, distanceInKM: number) {
+  return kwPerKm * distanceInKM;
+}
+
 export function kmPrkWTokWPrKm(kmPrKw: number) {
   if (typeof kmPrKw === 'number') {
     return 1 / kmPrKw;

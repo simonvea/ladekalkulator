@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useState, ChangeEvent } from 'react';
 import {
   getChargingSpeedInKMMinute,
+  getKWNeededForDistance,
   getTimeForDistance,
   kmPrkWTokWPrKm,
   kWprKmTokmPrkW,
@@ -46,6 +47,10 @@ export default function Tid() {
     kw
   );
   const time = getTimeForDistance(km, speed);
+  const kWNeeded = getKWNeededForDistance(
+    Number.parseFloat(consumption.kwPerMile) / 10,
+    km
+  );
 
   return (
     <div className="flex flex-col items-center justify-around space-y-6 min-h-screen">
@@ -115,12 +120,12 @@ export default function Tid() {
         </form>
         <section className="border-t-2 pt-8">
           <p className="my-2">
-            Du må lade i <strong>{timeToString(time)}</strong> for å kunne kjøre{' '}
-            {km} km.
+            Du må lade <strong>{kWNeeded.toLocaleString('nb-no')}</strong> kWt
+            for å kunne kjøre {km} km. Basert på hvor fort du lader i snitt,
+            blir ladetiden ca. <strong>{timeToString(time)}</strong>.
           </p>
           <p className="my-2">
-            Jeg vil anbefale at du legger til litt ekstra for å ha litt
-            marginer.
+            For å være på den sikre siden bør du lade litt til.
           </p>
           <p className="my-2">
             Med den hastigheten du har valgt lader du {speed.toFixed(2)} km per
