@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { prices } from '../business/data';
 import SpeedCalculator from '../components/speedCalculator';
 import Footer from '../components/footer';
+import Header from '../components/header';
 
 export default function Billigst() {
   return (
@@ -11,13 +12,13 @@ export default function Billigst() {
         <meta name="description" content="Viser de billigste lademulighetene" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      <Header backArrow title="Ladekostnad" />
       <main className="flex flex-col items-center px-6 w-full">
         <h1 className="text-xl mb-4 mt-8"> Hvor er det billigst å lade?</h1>
 
         <SpeedCalculator prices={prices} />
       </main>
-      <Footer showBackToHome />
+      <Footer />
     </div>
   );
 }

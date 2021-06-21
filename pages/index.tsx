@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Footer from '../components/footer';
+import Header from '../components/header';
 
 export default function Home() {
   const [deferredPrompt, setDeferredPrompt] =
@@ -40,17 +41,15 @@ export default function Home() {
   };
 
   return (
-    <div className="h-screen grid grid-rows-2">
-      <header className="flex flex-col justify-evenly items-center">
-        <h1 className="text-2xl">Ladekalkulator</h1>
+    <div className="h-screen grid grid-rows-3">
+      <Header title="Ladekalkulator" />
+      <main className="flex flex-col items-center space-y-5 justify-center mx-auto w-56">
         <img
           src="/images/logo192x192.png"
           height={192}
           width={192}
           alt="Ladekalkulator logo. Ladestasjon med kalkulator."
         />
-      </header>
-      <main className="flex flex-col items-center space-y-5 justify-center mx-auto w-56">
         <Link href="/billigst">
           <a className="text-center py-4 bg-blue-300 rounded w-full">
             Hvor er det billigst å lade?

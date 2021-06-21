@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import { useState, ChangeEvent } from 'react';
 import {
   getChargingSpeedInKMMinute,
@@ -10,6 +9,7 @@ import {
 } from '../business/calculateTimeForDistance';
 import timeToString from '../business/timeToString';
 import Footer from '../components/footer';
+import Header from '../components/header';
 
 export default function Tid() {
   const [km, setKm] = useState(10);
@@ -61,6 +61,7 @@ export default function Tid() {
           content="Hvor lenge må du lade for å komme x antall km?"
         />
       </Head>
+      <Header backArrow title="Ladetid" />
       <main className="flex flex-col items-center px-6 w-full">
         <h1 className="text-xl mb-4 mt-8">Hvor lenge må du lade?</h1>
 
@@ -133,7 +134,7 @@ export default function Tid() {
           </p>
         </section>
       </main>
-      <Footer showBackToHome />
+      <Footer />
     </div>
   );
 }
