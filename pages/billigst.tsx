@@ -12,7 +12,7 @@ export default function Billigst() {
         <meta name="description" content="Viser de billigste lademulighetene" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header backArrow title="Ladekostnad" />
+      <Header title="Ladekostnad" />
       <main className="flex flex-col items-center px-6 w-full">
         <h1 className="text-xl mb-4 mt-8"> Hvor er det billigst å lade?</h1>
 

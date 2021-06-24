@@ -5,7 +5,7 @@ import Header from '../components/header';
 const About: FC = () => {
   return (
     <div className="min-h-screen grid grid-rows-3">
-      <Header backArrow />
+      <Header />
       <main className="flex flex-col justify-center items-center">
         <article>
           Denne nettsiden er laget av{' '}

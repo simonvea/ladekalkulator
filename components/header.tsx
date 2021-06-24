@@ -5,20 +5,18 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 type HeaderProps = {
   title?: string;
-  backArrow?: boolean;
 };
 
-const Header: FC<HeaderProps> = ({ title, backArrow }) => {
+const Header: FC<HeaderProps> = ({ title }) => {
   const router = useRouter();
-
-  const goBack = () => router.back();
+  const isHomeScreen = router.pathname === '/';
 
   return (
     <div className="h-14 w-screen">
       <header className="h-14 shadow w-screen fixed top-0 bg-white grid grid-cols-3 items-center">
-        {backArrow && (
+        {!isHomeScreen && (
           <Link href="/">
-            <a className="ml-3 justify-self-start text-center" onClick={goBack}>
+            <a className="ml-3 justify-self-start text-center">
               <ArrowBackIosIcon />
             </a>
           </Link>

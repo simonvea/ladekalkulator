@@ -61,7 +61,7 @@ export default function Tid() {
           content="Hvor lenge må du lade for å komme x antall km?"
         />
       </Head>
-      <Header backArrow title="Ladetid" />
+      <Header title="Ladetid" />
       <main className="flex flex-col items-center px-6 w-full">
         <h1 className="text-xl mb-4 mt-8">Hvor lenge må du lade?</h1>
 
