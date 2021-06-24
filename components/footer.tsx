@@ -6,8 +6,8 @@ import InfoIcon from '@material-ui/icons/InfoOutlined';
 
 const Footer: FC = () => {
   return (
-    <div className="h-16 w-full">
-      <footer className="flex h-16 shadow bg-white items-center w-full fixed bottom-0">
+    <div className="h-20 w-full">
+      <footer className="flex h-24 shadow bg-white items-center w-full fixed bottom-0 py-4">
         <nav className="w-full h-full">
           <ul className="flex w-full h-full justify-evenly items-center">
             <li>

@@ -12,17 +12,17 @@ const Header: FC<HeaderProps> = ({ title }) => {
   const isHomeScreen = router.pathname === '/';
 
   return (
-    <div className="h-14 w-screen">
-      <header className="h-14 shadow w-screen fixed top-0 bg-white grid grid-cols-3 items-center">
+    <div className="h-16 w-screen">
+      <header className="h-16 shadow w-screen fixed top-0 bg-white grid grid-cols-3 items-center">
         {!isHomeScreen && (
           <Link href="/">
-            <a className="ml-3 justify-self-start text-center">
+            <a className="ml-4 justify-self-start text-center">
               <ArrowBackIosIcon />
             </a>
           </Link>
         )}
         {title && (
-          <h1 className="text-xl justify-self-center col-start-2">{title}</h1>
+          <h1 className="text-2xl justify-self-center col-start-2">{title}</h1>
         )}
       </header>
     </div>
