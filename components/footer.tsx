@@ -11,18 +11,18 @@ const Footer: FC = () => {
         <nav className="w-full h-full">
           <ul className="flex w-full h-full justify-evenly items-center">
             <li>
-              <Link href="/tid">
-                <a className="text-center">
-                  <AccessTimeIcon fontSize="large" />
-                  <div>Tid</div>
-                </a>
-              </Link>
-            </li>
-            <li>
               <Link href="/billigst">
                 <a className="text-center">
                   <MonetizationOnIcon fontSize="large" />
                   <div>Pris</div>
+                </a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/tid">
+                <a className="text-center">
+                  <AccessTimeIcon fontSize="large" />
+                  <div>Tid</div>
                 </a>
               </Link>
             </li>
