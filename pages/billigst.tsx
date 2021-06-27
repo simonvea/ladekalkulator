@@ -9,7 +9,10 @@ export default function Billigst() {
     <div className="flex flex-col items-center justify-evenly space-y-8 min-h-screen">
       <Head>
         <title>Billigste ladere</title>
-        <meta name="description" content="Viser de billigste lademulighetene" />
+        <meta
+          name="description"
+          content="Viser hvor mye det koster å lade og de billigste lademulighetene"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header title="Ladekostnad" />

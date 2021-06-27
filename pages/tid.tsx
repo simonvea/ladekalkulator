@@ -58,7 +58,7 @@ export default function Tid() {
         <title>Ladetid</title>
         <meta
           name="description"
-          content="Hvor lenge må du lade for å komme x antall km?"
+          content="Viser hvor lenge du må lade for å komme x antall km eller per kWt"
         />
       </Head>
       <Header title="Ladetid" />
