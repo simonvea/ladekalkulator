@@ -48,6 +48,58 @@ export function getPricePrMinute(
   }, []);
 }
 
+export function getPricePr({
+  providers,
+  charger,
+  priceUnit,
+  averageChargingSpeed,
+}: {
+  providers: ProviderInfo[];
+  charger: Charger;
+  priceUnit: 'kW' | 'minute';
+  averageChargingSpeed?: number;
+}) {
+  const chargingSpeed = averageChargingSpeed || charger;
+
+  return providers.reduce((prev, curr) => {
+    const priceInfo = curr[charger];
+    if (priceInfo) {
+      prev.push({
+        name: curr.name,
+        price:
+          priceUnit === 'kW'
+            ? pricePrkW(priceInfo, chargingSpeed)
+            : pricePrMinute(priceInfo, chargingSpeed),
+      });
+    }
+    return prev;
+  }, []);
+}
+
+export function getPricePrkW(
+  providers: ProviderInfo[],
+  charger: Charger,
+  averageChargingSpeed?: number
+) {
+  const chargingSpeed = averageChargingSpeed || charger;
+
+  return providers.reduce((prev, curr) => {
+    const priceInfo = curr[charger];
+    if (priceInfo) {
+      prev.push({
+        name: curr.name,
+        price: pricePrkW(priceInfo, chargingSpeed),
+      });
+    }
+    return prev;
+  }, []);
+}
+
+function pricePrkW(priceInfo: PriceInfoPer, KWT: number) {
+  const minutesPrkW = 60 / KWT;
+  return priceInfo.kWt + priceInfo.minute * minutesPrkW;
+}
+
 export function getCheapest(providers: PricePerMinute[]) {
   return providers.sort((a, b) => a.price - b.price)[0];
 }
