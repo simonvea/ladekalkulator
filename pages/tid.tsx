@@ -68,20 +68,20 @@ export default function Tid() {
         <form className="my-4 flex flex-col items-baseline space-y-4">
           <label htmlFor="km">Hvor mange km vil du kjøre?</label>
           <div className="relative self-center">
-            <span className="absolute right-6 pt-2">km</span>
+            <span className="absolute right-7 pt-2">km</span>
             <input
               name="km"
               id="km"
               value={km}
               onChange={handleKm}
               type="number"
-              className="w-28 py-2 pl-2 pr-1"
+              className="w-28 py-2 pl-2 pr-1 border border-gray-400 outline-none focus:outline-none focus:ring rounded"
             ></input>
           </div>
           <label htmlFor="kWt">Hva er estimert forbruk på strekningen?</label>
           <div>
             <div className="relative self-center">
-              <span className="absolute right-6 pt-2">kWt/mil</span>
+              <span className="absolute right-7 pt-2">kWt/mil</span>
               <input
                 name="kWt"
                 id="kWt"
@@ -89,12 +89,12 @@ export default function Tid() {
                 onChange={handleKwPerMile}
                 type="number"
                 step="0.1"
-                className="w-32 py-2 pl-2 pr-1"
+                className="w-32 py-2 pl-2 pr-1 border border-gray-400 outline-none focus:outline-none focus:ring rounded"
               ></input>
             </div>
             eller
             <div className="relative self-center">
-              <span className="absolute right-6 pt-2">km/kWt</span>
+              <span className="absolute right-7 pt-2">km/kWt</span>
               <input
                 name="kmkW"
                 id="kmKw"
@@ -102,20 +102,20 @@ export default function Tid() {
                 onChange={handlekmPerkWt}
                 type="number"
                 step="0.1"
-                className="w-32 py-2 pl-2 pr-1"
+                className="w-32 py-2 pl-2 pr-1 border border-gray-400 outline-none focus:outline-none focus:ring rounded"
               ></input>
             </div>
           </div>
           <label htmlFor="kw">Hvor fort kommer du til å lade (i snitt)?</label>
           <div className="relative self-center">
-            <span className="absolute right-6 pt-2">kW</span>
+            <span className="absolute right-7 pt-2">kW</span>
             <input
               name="kw"
               id="kw"
               value={kw}
               onChange={handleKw}
               type="number"
-              className="w-24 py-2 pl-2 pr-1"
+              className="w-24 py-2 pl-2 pr-1 border border-gray-400 outline-none focus:outline-none focus:ring rounded"
             ></input>{' '}
           </div>
         </form>

@@ -80,13 +80,14 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ prices }) => {
 
   return (
     <section>
-      <form className="my-4 flex flex-col items-center space-y-3">
+      <form className="my-4 flex flex-col items-center space-y-5">
         <label htmlFor="charger">Hvilken type lader?</label>
         <select
           name="charger"
           id="charger"
           value={charger}
           onChange={handleChargerSelect}
+          className="p-1 border border-gray-400 outline-none focus:outline-none rounded"
         >
           {availableChargers.map((c) => (
             <option value={c} key={c}>
@@ -130,9 +131,9 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ prices }) => {
             onChange={handleSpeedInput}
             type="number"
             max={charger}
-            className="w-24 py-2 pl-2 pr-1"
+            className="w-24 py-1 pl-2 pr-1 border border-gray-400 outline-none focus:outline-none focus:ring rounded"
           ></input>
-          <span className="absolute right-6 pt-2">kW</span>
+          <span className="absolute right-7 pt-1">kW</span>
         </div>
         <p>
           Kalkulatoren antar at du betaler via app eller brikke og ikke SMS.
@@ -145,7 +146,7 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ prices }) => {
             type="checkbox"
             checked={showDiscount}
             onChange={handleDiscountSelect}
-            className="h-6 w-6 mr-4"
+            className="h-6 w-6 mr-4 "
           ></input>
         </div>
         <section
@@ -160,6 +161,7 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ prices }) => {
               id="discountProvider"
               value={discountProvider}
               onChange={handleDiscountProviderSelect}
+              className="p-1 border border-gray-400 outline-none focus:outline-none rounded"
             >
               {(['BKK', 'Circle K', 'Fortum', 'mer'] as Provider[]).map(
                 (provider) => (
@@ -170,15 +172,16 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ prices }) => {
               )}
             </select>
           </div>
-          <div>
+          <div className="flex flex-col space-y-3">
             <label htmlFor="discountAmount">Hvor mye?</label>
             <div className="relative">
-              <span className="absolute right-6 pt-2">%</span>
+              <span className="absolute right-7 pt-1">%</span>
               <input
                 name="discountAmount"
                 id="discountAmount"
                 type="number"
-                className="w-24 py-2 pl-2 pr-1"
+                max="100"
+                className="w-24 py-1 pl-2 pr-1 border border-gray-400 outline-none focus:outline-none focus:ring rounded"
                 value={discountPercent}
                 onChange={handleDiscountPercent}
               ></input>
