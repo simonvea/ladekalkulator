@@ -27,7 +27,7 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ prices }) => {
     if (speed > charger) {
       setSpeed(charger);
     }
-  }, [charger]);
+  }, [charger, speed]);
 
   const availableChargers: Charger[] = [22, 50];
 
@@ -60,7 +60,7 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ prices }) => {
         }
         return provider;
       }),
-    [discountPercent, discountProvider]
+    [discountPercent, discountProvider, prices]
   );
 
   const pricesWithdiscount = showDiscount ? calculateDiscount() : prices;
