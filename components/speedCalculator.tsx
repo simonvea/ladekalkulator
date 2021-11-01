@@ -53,7 +53,7 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ prices }) => {
   };
 
   const calculateDiscount = useCallback(
-    () =>
+    (): ProviderInfo[] =>
       prices.map((provider) => {
         if (provider.name === discountProvider) {
           return addDiscount(provider, Number.parseInt(discountPercent));
@@ -219,7 +219,7 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ prices }) => {
             </thead>
             <tbody className="divide-y divide-gray-200 divide-x">
               {pricePer.map((p) => (
-                <tr key={p.name}>
+                <tr key={p.id}>
                   <th
                     scope="row"
                     className="text-left text-m text-gray-600 font-medium px-3"

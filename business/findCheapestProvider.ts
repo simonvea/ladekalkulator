@@ -7,6 +7,7 @@ export type Provider = 'mer' | 'Fortum' | 'BKK' | 'Circle K';
 
 export type ProviderInfo = {
   name: Provider;
+  id: number;
   22?: PriceInfoPer;
   50?: PriceInfoPer;
   100?: PriceInfoPer;
@@ -48,6 +49,12 @@ export function getPricePrMinute(
   }, []);
 }
 
+type Price = {
+  name: string;
+  price: number;
+  id: number;
+};
+
 export function getPricePr({
   providers,
   charger,
@@ -58,7 +65,7 @@ export function getPricePr({
   charger: Charger;
   priceUnit: 'kW' | 'minute';
   averageChargingSpeed?: number;
-}) {
+}): Price[] {
   const chargingSpeed = averageChargingSpeed || charger;
 
   return providers.reduce((prev, curr) => {
@@ -66,6 +73,7 @@ export function getPricePr({
     if (priceInfo) {
       prev.push({
         name: curr.name,
+        id: curr.id,
         price:
           priceUnit === 'kW'
             ? pricePrkW(priceInfo, chargingSpeed)
@@ -104,11 +112,14 @@ export function getCheapest(providers: PricePerMinute[]) {
   return providers.sort((a, b) => a.price - b.price)[0];
 }
 
-export function addDiscount(provider: ProviderInfo, discountPercent: number) {
+export function addDiscount(
+  provider: ProviderInfo,
+  discountPercent: number
+): ProviderInfo {
   const keys = Object.keys(provider);
 
-  const info = {
-    name: provider.name,
+  const info: ProviderInfo = {
+    ...provider,
   };
 
   keys.forEach((k) => {
