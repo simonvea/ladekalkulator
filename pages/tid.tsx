@@ -40,7 +40,7 @@ export default function Tid() {
   };
 
   const handleKw = ({ target }: ChangeEvent<HTMLInputElement>) =>
-    setKw(Number.parseInt(target.value.slice(0, 3), 10));
+    setKw(Number.parseFloat(target.value.slice(0, 3)));
 
   const speed = getChargingSpeedInKMMinute(
     Number.parseFloat(consumption.kwPerMile),

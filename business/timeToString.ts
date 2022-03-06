@@ -1,4 +1,6 @@
 export default function timeToString(minutes: number) {
+  if (minutes == Infinity) return 'uendelig';
+
   let min = Math.floor(Number(minutes));
   if (typeof min !== 'number' || Number.isNaN(min))
     return 'uvisst antall minutter';
