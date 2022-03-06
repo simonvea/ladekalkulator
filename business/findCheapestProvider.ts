@@ -3,7 +3,12 @@ export type PriceInfoPer = {
   minute: number;
 };
 
-export type Provider = 'mer' | 'Fortum' | 'BKK' | 'Circle K';
+export type Provider =
+  | 'mer'
+  | 'Fortum/Recharge/Kople'
+  | 'Bilkraft'
+  | 'Ionity'
+  | 'Circle K';
 
 export type ProviderInfo = {
   name: Provider;
@@ -16,6 +21,7 @@ export type ProviderInfo = {
   200?: PriceInfoPer;
   225?: PriceInfoPer;
   300?: PriceInfoPer;
+  350?: PriceInfoPer;
 };
 
 function pricePrMinute(priceInfo: PriceInfoPer, KWT: number) {
@@ -28,7 +34,7 @@ type PricePerMinute = {
   price: number;
 };
 
-export type Charger = 22 | 50 | 100 | 150 | 300;
+export type Charger = 22 | 50 | 100 | 150 | 300 | 350;
 
 export function getPricePrMinute(
   providers: ProviderInfo[],
