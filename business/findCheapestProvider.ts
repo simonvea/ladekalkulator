@@ -55,11 +55,34 @@ export function getPricePrMinute(
   }, []);
 }
 
-type Price = {
+export type Price = {
   name: string;
   price: number;
   id: number;
 };
+
+function getPriceLevel(providerInfo: ProviderInfo, charger: Charger) {
+  // TODO: Take in to account chargning speed
+  let priceLevel = providerInfo[charger];
+
+  if (!priceLevel) {
+    const availableChargers = Object.keys(providerInfo).filter(
+      (v) => !!Number(v)
+    );
+
+    const sortedChargers = availableChargers.sort(
+      (a, b) => Number(b) - Number(a)
+    );
+
+    const highestAvailableCharger = sortedChargers.find(
+      (k) => Number(k) < charger
+    );
+
+    priceLevel = providerInfo[highestAvailableCharger];
+  }
+
+  return priceLevel;
+}
 
 export function getPricePr({
   providers,
@@ -75,7 +98,7 @@ export function getPricePr({
   const chargingSpeed = averageChargingSpeed || charger;
 
   return providers.reduce((prev, curr) => {
-    const priceInfo = curr[charger];
+    const priceInfo = getPriceLevel(curr, charger);
     if (priceInfo) {
       prev.push({
         name: curr.name,

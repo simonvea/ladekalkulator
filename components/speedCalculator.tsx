@@ -29,7 +29,7 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ prices }) => {
     }
   }, [charger, speed]);
 
-  const availableChargers: Charger[] = [22, 50];
+  const availableChargers: Charger[] = [22, 50, 100, 150];
 
   const handleChargerSelect = (e: ChangeEvent<HTMLSelectElement>) =>
     setCharger(Number(e.target.value) as Charger);
