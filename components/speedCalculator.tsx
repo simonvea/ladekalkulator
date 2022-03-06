@@ -163,13 +163,11 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ prices }) => {
               onChange={handleDiscountProviderSelect}
               className="p-1 border border-gray-400 outline-none focus:outline-none rounded"
             >
-              {(['BKK', 'Circle K', 'Fortum', 'mer'] as Provider[]).map(
-                (provider) => (
-                  <option value={provider} key={provider}>
-                    {provider}
-                  </option>
-                )
-              )}
+              {prices.map(({ name, id }) => (
+                <option value={name} key={id}>
+                  {name}
+                </option>
+              ))}
             </select>
           </div>
           <div className="flex flex-col space-y-3">
