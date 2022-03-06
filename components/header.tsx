@@ -12,7 +12,7 @@ const Header: FC<HeaderProps> = ({ title }) => {
   const isHomeScreen = router.pathname === '/';
 
   return (
-    <div className="h-16 w-screen">
+    <div className="h-16 w-screen z-40">
       <header className="h-16 shadow w-screen fixed top-0 bg-white grid grid-cols-3 items-center">
         {!isHomeScreen && (
           <Link href="/">

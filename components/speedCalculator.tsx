@@ -123,7 +123,7 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ prices }) => {
           </div>
         </section>
         <label htmlFor="speed">Hvor fort lader du i snitt?</label>
-        <div className="relative">
+        <div className="relative z-0">
           <input
             name="speed"
             id="speed"
