@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import logo from '../public/images/logo192x192.png';
 import { useEffect, useState } from 'react';
 import Footer from '../components/footer';
 import Header from '../components/header';
@@ -45,12 +46,14 @@ export default function Home() {
     <div className="h-screen grid grid-rows-3">
       <Header title="Ladekalkulator" />
       <main className="flex flex-col items-center space-y-5 justify-center mx-auto w-56">
-        <Image
-          src="/images/logo192x192.png"
-          height={192}
-          width={192}
-          alt="Ladekalkulator logo. Ladestasjon med kalkulator."
-        />
+        <div>
+          <Image
+            src={logo}
+            height={192}
+            width={192}
+            alt="Ladekalkulator logo. Ladestasjon med kalkulator."
+          />
+        </div>
         <Link href="/billigst">
           <a className="text-center py-4 bg-blue-300 rounded w-full">
             Hvor er det billigst å lade?
