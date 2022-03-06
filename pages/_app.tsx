@@ -14,9 +14,12 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <meta
           name="description"
-          content="Ladekalkulatoren hjelper deg i å finne ut hvor lenge du må lade og hvor mye det koster."
+          content="Ladekalkulatoren hjelper deg med å finne ut hvor lenge du må lade og hvor mye det koster. Den lar deg sammenligne prisen hos forskjellige operatører, som Fortum/Recharge, mer, Circkle K og Bilkraft. "
         />
-        <meta name="keywords" content="ladepris,ladehastighet" />
+        <meta
+          name="keywords"
+          content="ladepris,ladehastighet,hurtiglading,normallading"
+        />
         <title>Ladekalkulator</title>
 
         <meta name="screen-orientation" content="portrait"></meta>
