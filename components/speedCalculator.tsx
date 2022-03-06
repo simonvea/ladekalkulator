@@ -246,6 +246,12 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ prices }) => {
             </tbody>
           </table>
         </div>
+        <aside className="mt-4 max-w-lg p-2 shadow">
+          ℹ️ Om jeg ikke har priser for valgt lader for en operatør, så velges
+          laderen med litt lavere hastighet for den operatøren.
+          Gjennomsnittshastighet blir redusert til maks tilgjengelig for den
+          laderen i beregningen av pris for (kun) den operatøren.
+        </aside>
       </section>
     </section>
   );

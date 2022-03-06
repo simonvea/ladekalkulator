@@ -61,11 +61,21 @@ export type Price = {
   id: number;
 };
 
-function getPriceLevel(providerInfo: ProviderInfo, charger: Charger) {
-  // TODO: Take in to account chargning speed
-  let priceLevel = providerInfo[charger];
+export type PriceLevel = {
+  priceInfo: PriceInfoPer;
+  availableSpeed: number;
+};
 
-  if (!priceLevel) {
+function getPriceLevel(
+  providerInfo: ProviderInfo,
+  charger: Charger
+): PriceLevel {
+  let priceLevel: PriceLevel = {
+    priceInfo: providerInfo[charger],
+    availableSpeed: charger,
+  };
+
+  if (!priceLevel.priceInfo) {
     const availableChargers = Object.keys(providerInfo).filter(
       (v) => !!Number(v)
     );
@@ -78,7 +88,10 @@ function getPriceLevel(providerInfo: ProviderInfo, charger: Charger) {
       (k) => Number(k) < charger
     );
 
-    priceLevel = providerInfo[highestAvailableCharger];
+    priceLevel = {
+      priceInfo: providerInfo[highestAvailableCharger],
+      availableSpeed: Number(highestAvailableCharger),
+    };
   }
 
   return priceLevel;
@@ -95,20 +108,25 @@ export function getPricePr({
   priceUnit: 'kW' | 'minute';
   averageChargingSpeed?: number;
 }): Price[] {
-  const chargingSpeed = averageChargingSpeed || charger;
-
   return providers.reduce((prev, curr) => {
-    const priceInfo = getPriceLevel(curr, charger);
-    if (priceInfo) {
-      prev.push({
-        name: curr.name,
-        id: curr.id,
-        price:
-          priceUnit === 'kW'
-            ? pricePrkW(priceInfo, chargingSpeed)
-            : pricePrMinute(priceInfo, chargingSpeed),
-      });
-    }
+    const priceLevel = getPriceLevel(curr, charger);
+
+    if (!priceLevel.priceInfo) return prev;
+
+    const chargingSpeed =
+      averageChargingSpeed && averageChargingSpeed < priceLevel.availableSpeed
+        ? averageChargingSpeed
+        : priceLevel.availableSpeed;
+
+    prev.push({
+      name: curr.name,
+      id: curr.id,
+      price:
+        priceUnit === 'kW'
+          ? pricePrkW(priceLevel.priceInfo, chargingSpeed)
+          : pricePrMinute(priceLevel.priceInfo, chargingSpeed),
+    });
+
     return prev;
   }, []);
 }
