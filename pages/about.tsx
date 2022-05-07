@@ -43,7 +43,7 @@ const About: FC = () => {
         </article>
         <aside className="mt-8">
           Ladepriser sist oppdatert{' '}
-          <time dateTime="2022-03-06">06.03.2022</time>.
+          <time dateTime="2022-05-07">07.05.2022</time>.
         </aside>
       </main>
 

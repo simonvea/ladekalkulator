@@ -5,7 +5,7 @@ export type PriceInfoPer = {
 
 export type Provider =
   | 'mer'
-  | 'Fortum/Recharge/Kople'
+  | 'Fortum/Recharge'
   | 'Bilkraft'
   | 'Ionity'
   | 'Circle K';
