@@ -21,15 +21,15 @@ export const prices: ProviderInfo[] = [
   {
     name: 'mer',
     id: 3,
-    150: { kWt: 4.25, minute: 1.25 },
-    50: { kWt: 4.25, minute: 1.25 },
-    22: { kWt: 3.25, minute: 0.2 },
+    150: { kWt: 6.39, minute: 0 },
+    50: { kWt: 6.39, minute: 0 },
+    22: { kWt: 3.99, minute: 0 },
   },
   {
     name: 'Bilkraft',
     id: 4,
-    150: { kWt: 4.2, minute: 1.25 },
-    22: { kWt: 3.25, minute: 0.1 },
+    150: { kWt: 6.39, minute: 0 },
+    22: { kWt: 3.99, minute: 0 },
   },
   {
     name: 'Ionity',
