@@ -54,15 +54,15 @@ export default function Home() {
             alt="Ladekalkulator logo. Ladestasjon med kalkulator."
           />
         </div>
-        <Link href="/billigst">
-          <a className="text-center py-4 bg-blue-300 rounded w-full">
+        <Link href="/billigst" className="text-center py-4 bg-blue-300 rounded w-full">
+          
             Hvor er det billigst å lade?
-          </a>
+          
         </Link>
-        <Link href="/tid">
-          <a className="text-center py-4 bg-blue-300 rounded w-full">
+        <Link href="/tid" className="text-center py-4 bg-blue-300 rounded w-full">
+          
             Hvor lenge må jeg lade?
-          </a>
+          
         </Link>
         <button
           onClick={handleClickInstall}

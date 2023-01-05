@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import Link from 'next/link';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import MonetizationOnIcon from '@material-ui/icons/MonetizationOnOutlined';
-import InfoIcon from '@material-ui/icons/InfoOutlined';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOnOutlined';
+import InfoIcon from '@mui/icons-material/InfoOutlined';
 
 const Footer: FC = () => {
   return (
@@ -11,27 +11,27 @@ const Footer: FC = () => {
         <nav className="w-full h-full">
           <ul className="flex w-full h-full justify-evenly items-center">
             <li>
-              <Link href="/billigst">
-                <a className="text-center">
-                  <MonetizationOnIcon fontSize="large" />
-                  <div>Pris</div>
-                </a>
+              <Link href="/billigst" className="text-center">
+
+                <MonetizationOnIcon fontSize="large" />
+                <div>Pris</div>
+
               </Link>
             </li>
             <li>
-              <Link href="/tid">
-                <a className="text-center">
-                  <AccessTimeIcon fontSize="large" />
-                  <div>Tid</div>
-                </a>
+              <Link href="/tid" className="text-center">
+
+                <AccessTimeIcon fontSize="large" />
+                <div>Tid</div>
+
               </Link>
             </li>
             <li>
-              <Link href="/about">
-                <a className="text-center">
-                  <InfoIcon fontSize="large" />
-                  <div>Info</div>
-                </a>
+              <Link href="/about" className="text-center">
+
+                <InfoIcon fontSize="large" />
+                <div>Info</div>
+
               </Link>
             </li>
           </ul>
