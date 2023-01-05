@@ -4,11 +4,14 @@ export type PriceInfoPer = {
 };
 
 export type Provider =
-  | 'mer'
+  | 'Mer'
   | 'Fortum/Recharge'
-  | 'Bilkraft'
+  | 'Eviny'
   | 'Ionity'
-  | 'Circle K';
+  | 'Circle K'
+  | 'E.ON'
+  | 'Kople'
+  | 'Supercharge';
 
 export type ProviderInfo = {
   name: Provider;
