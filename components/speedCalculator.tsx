@@ -17,7 +17,7 @@ const priceForAmount = (price: number, amount: number) =>
 
 const SpeedCalculator: FC<SpeedCalculatorProps> = ({ prices }) => {
   const [showDiscount, setShowDiscount] = useState(false);
-  const [discountProvider, setDiscountProvider] = useState<Provider>('mer');
+  const [discountProvider, setDiscountProvider] = useState<Provider>('Mer');
   const [discountPercent, setDiscountPercent] = useState('10');
   const [charger, setCharger] = useState<Charger>(50);
   const [speed, setSpeed] = useState<number>(charger);
@@ -29,7 +29,7 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ prices }) => {
     }
   }, [charger, speed]);
 
-  const availableChargers: Charger[] = [22, 50, 100, 150];
+  const availableChargers: Charger[] = [22, 50, 100, 150]; //TODO: Change to "normal", "hurtig", "lyn"
 
   const handleChargerSelect = (e: ChangeEvent<HTMLSelectElement>) =>
     setCharger(Number(e.target.value) as Charger);
@@ -68,7 +68,7 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ prices }) => {
   const pricePer = getPricePr({
     providers: pricesWithdiscount,
     charger,
-    priceUnit: radio === 'tid' ? 'minute' : 'kW',
+    priceUnit: radio === 'tid' ? 'minute' : 'kW', // Todo: per km?
     averageChargingSpeed: speed,
   });
 
