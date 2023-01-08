@@ -6,6 +6,7 @@ import {
   ProviderInfo,
   addDiscount,
   getPricePr,
+  toSpeed,
 } from '../business/findCheapestProvider';
 
 export type SpeedCalculatorProps = {
@@ -19,23 +20,27 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ prices }) => {
   const [showDiscount, setShowDiscount] = useState(false);
   const [discountProvider, setDiscountProvider] = useState<Provider>('Mer');
   const [discountPercent, setDiscountPercent] = useState('10');
-  const [charger, setCharger] = useState<Charger>(50);
-  const [speed, setSpeed] = useState<number>(charger);
+  const [charger, setCharger] = useState<Charger>('normal');
+  const [speed, setSpeed] = useState<number>(toSpeed(charger));
   const [radio, setRadio] = useState<'tid' | 'energi'>('tid');
 
   useEffect(() => {
-    if (speed > charger) {
-      setSpeed(charger);
+    const maxChargerSpeed = toSpeed(charger);
+    if (speed > maxChargerSpeed) {
+      setSpeed(maxChargerSpeed);
     }
   }, [charger, speed]);
 
-  const availableChargers: Charger[] = [22, 50, 100, 150]; //TODO: Change to "normal", "hurtig", "lyn"
+  const availableChargers: Charger[] = ['normal', 'hurtig', 'lyn'];
 
   const handleChargerSelect = (e: ChangeEvent<HTMLSelectElement>) =>
-    setCharger(Number(e.target.value) as Charger);
+    setCharger(e.target.value as Charger);
 
   const handleSpeedInput = (event: ChangeEvent<HTMLInputElement>) => {
-    const newSpeed = Math.min(Number.parseInt(event.target.value, 10), charger);
+    const newSpeed = Math.min(
+      Number.parseInt(event.target.value, 10),
+      toSpeed(charger)
+    );
     setSpeed(newSpeed);
   };
 
@@ -91,7 +96,7 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ prices }) => {
         >
           {availableChargers.map((c) => (
             <option value={c} key={c}>
-              {c} kW
+              {c}
             </option>
           ))}
         </select>
@@ -136,7 +141,8 @@ const SpeedCalculator: FC<SpeedCalculatorProps> = ({ prices }) => {
           <span className="absolute right-7 pt-1">kW</span>
         </div>
         <p>
-          Kalkulatoren antar at du betaler via app eller brikke og ikke SMS.
+          Prisene er basert på at du er en uregistrert kunde og betaler via SMS,
+          Vipps eller lignende.
         </p>
         <div className="flex space-x-12 self-start w-72 items-center">
           <label htmlFor="discountSelect">Har du noen rabatter?</label>

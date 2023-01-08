@@ -16,15 +16,9 @@ export type Provider =
 export type ProviderInfo = {
   name: Provider;
   id: number;
-  22?: PriceInfoPer;
-  50?: PriceInfoPer;
-  100?: PriceInfoPer;
-  125?: PriceInfoPer;
-  150?: PriceInfoPer;
-  200?: PriceInfoPer;
-  225?: PriceInfoPer;
-  300?: PriceInfoPer;
-  350?: PriceInfoPer;
+  normal?: PriceInfoPer;
+  hurtig?: PriceInfoPer;
+  lyn?: PriceInfoPer;
 };
 
 function pricePrMinute(priceInfo: PriceInfoPer, KWT: number) {
@@ -37,14 +31,25 @@ type PricePerMinute = {
   price: number;
 };
 
-export type Charger = 22 | 50 | 100 | 150 | 300 | 350;
+export type Charger = 'normal' | 'hurtig' | 'lyn';
+
+export function toSpeed(charger: Charger) {
+  switch (charger) {
+    case 'normal':
+      return 22;
+    case 'hurtig':
+      return 50;
+    case 'lyn':
+      return 350;
+  }
+}
 
 export function getPricePrMinute(
   providers: ProviderInfo[],
   charger: Charger,
   averageChargingSpeed?: number
 ): PricePerMinute[] {
-  const chargingSpeed = averageChargingSpeed || charger;
+  const chargingSpeed = averageChargingSpeed || toSpeed(charger);
 
   return providers.reduce((prev, curr) => {
     const priceInfo = curr[charger];
@@ -69,37 +74,7 @@ export type PriceLevel = {
   availableSpeed: number;
 };
 
-function getPriceLevel(
-  providerInfo: ProviderInfo,
-  charger: Charger
-): PriceLevel {
-  let priceLevel: PriceLevel = {
-    priceInfo: providerInfo[charger],
-    availableSpeed: charger,
-  };
-
-  if (!priceLevel.priceInfo) {
-    const availableChargers = Object.keys(providerInfo).filter(
-      (v) => !!Number(v)
-    );
-
-    const sortedChargers = availableChargers.sort(
-      (a, b) => Number(b) - Number(a)
-    );
-
-    const highestAvailableCharger = sortedChargers.find(
-      (k) => Number(k) < charger
-    );
-
-    priceLevel = {
-      priceInfo: providerInfo[highestAvailableCharger],
-      availableSpeed: Number(highestAvailableCharger),
-    };
-  }
-
-  return priceLevel;
-}
-
+//Todo: bruk høyere hastighet hvis den valgte ikke er tilgjengelig -> Evt endre basert på hastighet
 export function getPricePr({
   providers,
   charger,
@@ -112,50 +87,29 @@ export function getPricePr({
   averageChargingSpeed?: number;
 }): Price[] {
   return providers.reduce((prev, curr) => {
-    const priceLevel = getPriceLevel(curr, charger);
+    // check if charger is available
+    const canChargeAtSpeed = !!curr[charger];
 
-    if (!priceLevel.priceInfo) return prev;
+    if (!canChargeAtSpeed) return prev;
+
+    const availableSpeed = toSpeed(charger);
 
     const chargingSpeed =
-      averageChargingSpeed && averageChargingSpeed < priceLevel.availableSpeed
+      averageChargingSpeed && averageChargingSpeed < availableSpeed
         ? averageChargingSpeed
-        : priceLevel.availableSpeed;
+        : availableSpeed;
 
     prev.push({
       name: curr.name,
       id: curr.id,
       price:
         priceUnit === 'kW'
-          ? pricePrkW(priceLevel.priceInfo, chargingSpeed)
-          : pricePrMinute(priceLevel.priceInfo, chargingSpeed),
+          ? curr[charger].kWt
+          : pricePrMinute(curr[charger], chargingSpeed),
     });
 
     return prev;
   }, []);
-}
-
-export function getPricePrkW(
-  providers: ProviderInfo[],
-  charger: Charger,
-  averageChargingSpeed?: number
-) {
-  const chargingSpeed = averageChargingSpeed || charger;
-
-  return providers.reduce((prev, curr) => {
-    const priceInfo = curr[charger];
-    if (priceInfo) {
-      prev.push({
-        name: curr.name,
-        price: pricePrkW(priceInfo, chargingSpeed),
-      });
-    }
-    return prev;
-  }, []);
-}
-
-function pricePrkW(priceInfo: PriceInfoPer, KWT: number) {
-  const minutesPrkW = 60 / KWT;
-  return priceInfo.kWt + priceInfo.minute * minutesPrkW;
 }
 
 export function getCheapest(providers: PricePerMinute[]) {
